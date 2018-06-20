@@ -7,19 +7,24 @@ import (
 )
 
 // Client represents a customer
-type Client struct {
+type Result struct {
 	Name string
 	Age  int
 }
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
-	p := Client{Name: "Hasan Ayyad", Age: 27}
+	p := Result{Name: "Hasan Ayyad", Age: 27}
 	t, _ := template.ParseFiles("form.html")
 	t.Execute(w, p)
 }
 
-func resultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1>Whoa, Go is neat!</h1>")
+func resultsHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+
+	t, _ := template.ParseFiles("results.html")
+	t.Execute(w, "")
+
+	fmt.Fprintln(w, r.Form)
 }
 
 func main() {
@@ -28,8 +33,8 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", files))
 
 	// Routing requests
-	http.HandleFunc("/", formHandler)
-	http.HandleFunc("/result/", resultHandler)
+	http.HandleFunc("/form/", formHandler)
+	http.HandleFunc("/results/", resultsHandler)
 
 	// Starting server
 	http.ListenAndServe(":8080", nil)
