@@ -31,5 +31,6 @@ func main() {
 	http.HandleFunc("/", formHandler)
 	http.HandleFunc("/result/", resultHandler)
 
+	// Starting server
 	http.ListenAndServe(":8080", nil)
 }
