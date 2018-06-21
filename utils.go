@@ -1,10 +1,10 @@
 package main
 
 import (
+	"chitchat/data"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"chitchat/data"
 	"html/template"
 	"log"
 	"net/http"
