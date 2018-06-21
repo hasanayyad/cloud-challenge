@@ -1,15 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
-// Client represents a customer
+// Result represents a customer
 type Result struct {
 	Name string
 	Age  int
+}
+
+type information struct {
+	Gender          string
+	Age             string
+	MortgageBalance string
+	MonthlyPayment  string
+	YearsRemaining  int
 }
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
@@ -19,12 +27,24 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func resultsHandler(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	gender := r.PostFormValue("gender")
+	age := r.PostFormValue("age")
+	mortgageBalance := r.PostFormValue("mortgageBalance")
+	monthlyPayment := r.PostFormValue("monthlyPayment")
+	mortgageBalanceInt, _ := strconv.Atoi(mortgageBalance)
+	monthlyPaymentInt, _ := strconv.Atoi(monthlyPayment)
+	yearsRemaining := (mortgageBalanceInt / monthlyPaymentInt) / 12
+
+	person := information{
+		Gender:          gender,
+		Age:             age,
+		MortgageBalance: mortgageBalance,
+		MonthlyPayment:  monthlyPayment,
+		YearsRemaining:  yearsRemaining,
+	}
 
 	t, _ := template.ParseFiles("results.html")
-	t.Execute(w, "")
-
-	fmt.Fprintln(w, r.Form)
+	t.Execute(w, person)
 }
 
 func main() {

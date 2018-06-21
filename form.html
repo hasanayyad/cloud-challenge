@@ -15,27 +15,29 @@
 	
 		<nav class="navbar navbar-light bg-light navigation">
 		  <a class="navbar-brand nav-title" href="#">
-			  <img id="image" src="/static/RBC_Logo.svg" width="60" height="60" alt="">RBC Insurance
+				<img id="image" src="/static/RBC_Logo_Insurance.svg" align="left" height="60" alt=""><img id="image" src="/static/HOMI.png" height="60" alt="">
 		  </a>
 		</nav>
 		
 	
 		<div class="container back">
-			<h2 class="title">
-				HomeProtector Roadmap
-				<span class="glyphicon glyphicon-random icon"></span>
-			</h2>
+			<h2 class="title">HomeProtector Roadmap</h2>
 		
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="well" id="form-well">
 						
-						<form action="/results/" method="get">
-						
+						<p id="description">Welcome to HomeProtector Homie! This tool is designed to help you visualize the future of your home ownership. Tell us a bit about yourself!</p>
+					<hr>
+
+						<form action="/results/" method="post" enctype="multipart/form-data">
+			
 							<div class="row">
-								<label class="col-form-label col-xs-3">Name</label>
+								<label class="col-form-label col-xs-3">Gender</label>
 								<div class="col-xs-9">
-									<input type="text" class="form-control" name="name" placeholder="{{ .Name }}">
+									<label class="radio-inline"><input type="radio" name="gender" value="male">Male</label>
+									<label class="radio-inline"><input type="radio" name="gender" value="female">Female</label>
+									<label class="radio-inline"><input type="radio" name="gender" value="other">Other</label>
 								</div>
 							</div>
 
@@ -47,39 +49,16 @@
 							</div>
 
 							<div class="row">
-								<label class="col-form-label col-xs-3">Email</label>
+								<label class="col-form-label col-xs-3">Mortgage Balance</label>
 								<div class="col-xs-9">
-									<input type="email" class="form-control" id="email" placeholder="First.Last@rbc.com">
+									<input type="text" class="form-control" name="mortgageBalance" placeholder="$999999">
 								</div>
 							</div>
 
 							<div class="row">
-								<label class="col-form-label col-xs-3">Current Balance</label>
+								<label class="col-form-label col-xs-3">Monthly Payment</label>
 								<div class="col-xs-9">
-									<input type="email" class="form-control" id="currentBalance" placeholder="$999999">
-								</div>
-							</div>
-
-							<div class="row">
-								<label class="col-form-label col-xs-3">Years Remaining</label>
-								<div class="col-xs-9">
-									<input type="email" class="form-control" id="yearsRemaining" placeholder="30">
-								</div>
-							</div>
-
-							<div class="row">
-								<label class="col-form-label col-xs-3">Type of Insurance</label>
-								<div class="col-xs-9">
-									<label class="radio-inline"><input type="radio" name="optradio">Credit</label>
-									<label class="radio-inline"><input type="radio" name="optradio">Mortgage</label>
-								</div>
-							</div>
-							
-							
-							<div class="row">
-								<label for="description" class="col-form-label col-xs-3">Conditions</label>
-								<div class="col-xs-9">
-									<textarea class="form-control" rows="5" id="conditions" placeholder="Provide details about pre-existing conditions..."></textarea>
+									<input type="text" class="form-control" name="monthlyPayment" placeholder="$999">
 								</div>
 							</div>
 							
